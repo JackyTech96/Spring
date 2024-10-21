@@ -36,6 +36,9 @@ public class ClienteService {
         return clientewithMapStruct.toDtoList(clienteRepository.findByNome(nome));
     }
 
+    public List<ClienteDto> findByAzienda(final String azienda){
+        return clientewithMapStruct.toDtoList(clienteRepository.findaByAzienda(azienda));
+    }
     public List<ClienteDto> createCliente(final ClienteDto clienteDto) {
         Cliente cliente = clientewithMapStruct.toEntity(clienteDto);
         clienteRepository.save(cliente);

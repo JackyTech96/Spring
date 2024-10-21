@@ -31,6 +31,7 @@ public class ClienteController {
         return clienteService.findByNome(nome);
     }
 
+    @GetMapping("/filter")
     @PostMapping("/create")
     public List<ClienteDto> createCliente(@RequestBody ClienteDto clienteDto) {
         return clienteService.createCliente(clienteDto);

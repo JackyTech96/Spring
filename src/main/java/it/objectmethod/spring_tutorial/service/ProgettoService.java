@@ -28,7 +28,11 @@ public class ProgettoService {
         return progettoMapper.toDto(progetto);
     }
 
-    public 
+    public List<ProgettoDto> findProgettoByName(final String nome) {
+        // final List<Cliente> entities = clienteRepository.findByNome(nome);
+        // final List<ClienteDto> toDtos = withMapStruct.toDtoList(entities);
+        return progettoMapper.toDtoList(progettoRepository.findByNome(nome));
+    }
 
     public List<ProgettoDto> createProgetto(final ProgettoDto progettoDto) {
         Progetto progetto = progettoMapper.toEntity(progettoDto);
