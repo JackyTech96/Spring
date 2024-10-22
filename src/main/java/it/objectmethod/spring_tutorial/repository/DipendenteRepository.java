@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface DipendenteRepository extends JpaRepository<Dipendente, Integer> {
     List<Dipendente> findByNome(String nome);
+
+    List<Dipendente> findByNomeAndEmail (String nome, String email);
 }

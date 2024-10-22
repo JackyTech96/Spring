@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -30,5 +32,7 @@ public class Cliente {
     @Column(name = "azienda")
     private String azienda;
 
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    private List<Progetto> progetti;
 
 }

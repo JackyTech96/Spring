@@ -3,9 +3,9 @@ package it.objectmethod.spring_tutorial.service;
 import it.objectmethod.spring_tutorial.dto.ClienteDto;
 import it.objectmethod.spring_tutorial.entity.Cliente;
 import it.objectmethod.spring_tutorial.filter.ClienteParams;
-import it.objectmethod.spring_tutorial.mapper.ClienteMapper;
 import it.objectmethod.spring_tutorial.mapper.ClienteMapperWithMapStruct;
 import it.objectmethod.spring_tutorial.repository.ClienteRepository;
+import it.objectmethod.spring_tutorial.response.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +25,9 @@ public class ClienteService {
         return clientewithMapStruct.toDtoList(clienti);
     }
 
-    public ClienteDto findClienteById(final Integer clienteId) {
+    public ResponseWrapper<ClienteDto> findClienteById(final Integer clienteId) {
         Cliente cliente = clienteRepository.findById(clienteId).orElseThrow();
-        return clientewithMapStruct.toDto(cliente);
+        return new ResponseWrapper<>("Trovato", clientewithMapStruct.toDto(cliente));
     }
 
     public List<ClienteDto> findByNome(final String nome) {
@@ -36,9 +36,30 @@ public class ClienteService {
         return clientewithMapStruct.toDtoList(clienteRepository.findByNome(nome));
     }
 
-    public List<ClienteDto> findByAzienda(final String azienda){
-        return clientewithMapStruct.toDtoList(clienteRepository.findaByAzienda(azienda));
+
+    public List<ClienteDto> findByCognome(final String cognome) {
+        return clientewithMapStruct.toDtoList(clienteRepository.findByCognome(cognome));
     }
+
+    public List<ClienteDto> findByNomeAndCognome(final ClienteParams params) {
+        if (params.getNome() != null && params.getCognome() != null) {
+            return clientewithMapStruct
+                    .toDtoList(clienteRepository
+                            .findByNomeAndCognome(params.getNome(), params.getCognome()));
+        } else if (params.getNome() != null) {
+            return clientewithMapStruct.toDtoList(clienteRepository.findByNome(params.getNome()));
+        } else if (params.getCognome() != null) {
+            return clientewithMapStruct.toDtoList(clienteRepository.findByCognome(params.getCognome()));
+        } else {
+            return clientewithMapStruct
+                    .toDtoList(clienteRepository.findAll());
+        }
+    }
+
+    public List<ClienteDto> findByAzienda(final String azienda) {
+        return clientewithMapStruct.toDtoList(clienteRepository.findByAzienda(azienda));
+    }
+
     public List<ClienteDto> createCliente(final ClienteDto clienteDto) {
         Cliente cliente = clientewithMapStruct.toEntity(clienteDto);
         clienteRepository.save(cliente);

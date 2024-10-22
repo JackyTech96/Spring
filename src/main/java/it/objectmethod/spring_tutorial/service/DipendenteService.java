@@ -2,6 +2,7 @@ package it.objectmethod.spring_tutorial.service;
 
 import it.objectmethod.spring_tutorial.dto.DipendenteDto;
 import it.objectmethod.spring_tutorial.entity.Dipendente;
+import it.objectmethod.spring_tutorial.filter.DipendenteParams;
 import it.objectmethod.spring_tutorial.mapper.DipendenteMapperWithMapStruct;
 import it.objectmethod.spring_tutorial.repository.DipendenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class DipendenteService {
 //        final List<Dipendente> entities = dipendenteRepository.findByNome(nome);
 //        final List<DipendenteDto> toDtos = dipendenteMapperWithMapStruct.toDtoList(entities);
         return dipendenteMapperWithMapStruct.toDtoList(dipendenteRepository.findByNome(nome));
+    }
+
+    public List<DipendenteDto> findBy(DipendenteParams params) {
+        return dipendenteMapperWithMapStruct
+                .toDtoList((dipendenteRepository
+                        .findByNomeAndEmail(params.getNome(), params.getEmail())));
     }
 
 

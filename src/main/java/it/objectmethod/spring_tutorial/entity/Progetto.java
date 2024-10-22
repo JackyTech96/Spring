@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
@@ -31,4 +32,10 @@ public class Progetto {
     @Column(name = "data_fine")
     private Date data_fine;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "progetto", fetch = FetchType.LAZY)
+    private List<ProgettoDipendente> progettiDipendenti;
 }

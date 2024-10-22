@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -34,5 +36,6 @@ public class Dipendente {
     @Column(name = "ruolo")
     private String ruolo;
 
-
+    @OneToMany(mappedBy = "dipendente", fetch = FetchType.LAZY)
+    private List<ProgettoDipendente> progettiDipendenti;
 }

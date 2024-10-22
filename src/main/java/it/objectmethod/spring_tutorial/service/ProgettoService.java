@@ -2,7 +2,7 @@ package it.objectmethod.spring_tutorial.service;
 
 import it.objectmethod.spring_tutorial.dto.ProgettoDto;
 import it.objectmethod.spring_tutorial.entity.Progetto;
-import it.objectmethod.spring_tutorial.mapper.ProgettoMapper;
+import it.objectmethod.spring_tutorial.mapper.ProgettoMapperWithMapStruct;
 import it.objectmethod.spring_tutorial.repository.ProgettoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,26 +16,26 @@ public class ProgettoService {
     @Autowired
     private ProgettoRepository progettoRepository;
     @Autowired
-    private ProgettoMapper progettoMapper;
+    private ProgettoMapperWithMapStruct progettoMapperWithMapStruct;
 
     public List<ProgettoDto> getAllProgetti() {
         List<Progetto> progetti = progettoRepository.findAll();
-        return progettoMapper.toDtoList(progetti);
+        return progettoMapperWithMapStruct.toDtoList(progetti);
     }
 
     public ProgettoDto findProgettoById(final Integer progettoId) {
         Progetto progetto = progettoRepository.findById(progettoId).orElseThrow();
-        return progettoMapper.toDto(progetto);
+        return progettoMapperWithMapStruct.toDto(progetto);
     }
 
     public List<ProgettoDto> findProgettoByName(final String nome) {
         // final List<Cliente> entities = clienteRepository.findByNome(nome);
         // final List<ClienteDto> toDtos = withMapStruct.toDtoList(entities);
-        return progettoMapper.toDtoList(progettoRepository.findByNome(nome));
+        return progettoMapperWithMapStruct.toDtoList(progettoRepository.findByNome(nome));
     }
 
     public List<ProgettoDto> createProgetto(final ProgettoDto progettoDto) {
-        Progetto progetto = progettoMapper.toEntity(progettoDto);
+        Progetto progetto = progettoMapperWithMapStruct.toEntity(progettoDto);
         progettoRepository.save(progetto);
         return getAllProgetti();
     }
