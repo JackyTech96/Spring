@@ -30,35 +30,46 @@ public class ClienteService {
         return new ResponseWrapper<>("Trovato", clientewithMapStruct.toDto(cliente));
     }
 
-    public List<ClienteDto> findByNome(final String nome) {
-//        final List<Cliente> entities = clienteRepository.findByNome(nome);
-//        final List<ClienteDto> toDtos = withMapStruct.toDtoList(entities);
-        return clientewithMapStruct.toDtoList(clienteRepository.findByNome(nome));
-    }
+//    public List<ClienteDto> findByNome(final String nome) {
+//      final List<Cliente> entities = clienteRepository.findByNome(nome);
+//      final List<ClienteDto> toDtos = withMapStruct.toDtoList(entities);
+//        return clientewithMapStruct.toDtoList(clienteRepository.findByNome(nome));
+//    }
 
 
-    public List<ClienteDto> findByCognome(final String cognome) {
-        return clientewithMapStruct.toDtoList(clienteRepository.findByCognome(cognome));
-    }
+//    public List<ClienteDto> findByCognome(final String cognome) {
+//        return clientewithMapStruct.toDtoList(clienteRepository.findByCognome(cognome));
+//    }
+//
+//    public List<ClienteDto> findByNomeAndCognome(final String nome, final String cognome) {
+//        if (nome != null && cognome != null) {
+//            return clientewithMapStruct
+//                    .toDtoList(clienteRepository
+//                            .findByNomeAndCognome(nome, cognome));
+//        } else {
+//            return clientewithMapStruct
+//                    .toDtoList(clienteRepository.findAll());
+//        }
+//    }
 
-    public List<ClienteDto> findByNomeAndCognome(final ClienteParams params) {
-        if (params.getNome() != null && params.getCognome() != null) {
-            return clientewithMapStruct
-                    .toDtoList(clienteRepository
-                            .findByNomeAndCognome(params.getNome(), params.getCognome()));
-        } else if (params.getNome() != null) {
-            return clientewithMapStruct.toDtoList(clienteRepository.findByNome(params.getNome()));
-        } else if (params.getCognome() != null) {
-            return clientewithMapStruct.toDtoList(clienteRepository.findByCognome(params.getCognome()));
-        } else {
-            return clientewithMapStruct
-                    .toDtoList(clienteRepository.findAll());
-        }
-    }
+//    public List<ClienteDto> findByNomeOrCognome(final String nome, final String cognome) {
+//        if (nome != null && cognome != null) {
+//            return clientewithMapStruct
+//                    .toDtoList(clienteRepository
+//                            .findByNomeOrCognome(nome, cognome));
+//        } else if (nome != null) {
+//            return clientewithMapStruct.toDtoList(clienteRepository.findByNome(nome));
+//        } else if (cognome != null) {
+//            return clientewithMapStruct.toDtoList(clienteRepository.findByCognome(cognome));
+//        } else {
+//            return clientewithMapStruct
+//                    .toDtoList(clienteRepository.findAll());
+//        }
+//    }
 
-    public List<ClienteDto> findByAzienda(final String azienda) {
-        return clientewithMapStruct.toDtoList(clienteRepository.findByAzienda(azienda));
-    }
+//    public List<ClienteDto> findByAzienda(final String azienda) {
+//        return clientewithMapStruct.toDtoList(clienteRepository.findByAzienda(azienda));
+//    }
 
     public List<ClienteDto> createCliente(final ClienteDto clienteDto) {
         Cliente cliente = clientewithMapStruct.toEntity(clienteDto);
@@ -91,10 +102,22 @@ public class ClienteService {
         return getAllCLienti();
     }
 
-    public List<ClienteDto> findBy(final ClienteParams params) {
-        return clientewithMapStruct
-                .toDtoList(clienteRepository
-                        .findByNomeAndCognome(params.getNome(), params.getCognome()));
+//    public List<ClienteDto> findBy(final ClienteParams params) {
+//        return clientewithMapStruct
+//                .toDtoList(clienteRepository
+//                        .findByNomeAndCognome(params.getNome(), params.getCognome()));
+//    }
+
+//    public List<ClienteDto> options(final ClienteParams params) {
+//        if (Boolean.TRUE.equals(params.getUseAnd())) {
+//            return this.findByNomeAndCognome(params.getNome(), params.getCognome());
+//        } else {
+//            return this.findByNomeOrCognome(params.getNome(), params.getCognome());
+//        }
+//    }
+
+    public List<ClienteDto> withSpecifications(final ClienteParams params) {
+        return clientewithMapStruct.toDtoList(clienteRepository.findAll(params.toSpecification()));
     }
 }
 

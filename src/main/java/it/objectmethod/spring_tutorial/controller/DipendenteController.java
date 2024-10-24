@@ -2,9 +2,14 @@ package it.objectmethod.spring_tutorial.controller;
 
 import it.objectmethod.spring_tutorial.dto.DipendenteDto;
 import it.objectmethod.spring_tutorial.entity.Dipendente;
+import it.objectmethod.spring_tutorial.exepction.handler.ResponseUtil;
 import it.objectmethod.spring_tutorial.filter.DipendenteParams;
 import it.objectmethod.spring_tutorial.service.DipendenteService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,15 +32,15 @@ public class DipendenteController {
         return dipendenteService.findDipendenteById(id);
     }
 
-    @GetMapping("/filterByNome")
-    public List<DipendenteDto> findByNome(@RequestParam final String nome) {
-        return dipendenteService.findByNome(nome);
-    }
+//    @GetMapping("/filterByNome")
+//    public List<DipendenteDto> findByNome(@RequestParam final String nome) {
+//        return dipendenteService.findByNome(nome);
+//    }
 
-    @GetMapping("/filterBy")
-    public List<DipendenteDto> findBy(final DipendenteParams params) {
-        return dipendenteService.findBy(params);
-    }
+//    @GetMapping("/filterBy")
+//    public List<DipendenteDto> findBy(final DipendenteParams params) {
+//        return dipendenteService.findBy(params);
+//    }
 
     @PostMapping("/create")
     public List<DipendenteDto> createDipendente(@RequestBody DipendenteDto dipendenteDto) {
@@ -50,5 +55,11 @@ public class DipendenteController {
     @DeleteMapping("/delete/{id}")
     public List<DipendenteDto> deleteDipendente(@PathVariable(name = "id") final Integer dipendenteId) {
         return dipendenteService.deleteDipendente(dipendenteId);
+    }
+
+    @GetMapping("/specifications")
+    public ResponseEntity<List<DipendenteDto>> withSpecifications(@Valid final DipendenteParams params, final HttpServletRequest request) {
+        return ResponseUtil
+                .execute(() -> new ResponseEntity<>(dipendenteService.withSpecifications(params), HttpStatus.OK), request);
     }
 }

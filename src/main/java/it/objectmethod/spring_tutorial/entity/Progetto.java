@@ -36,6 +36,6 @@ public class Progetto {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "progetto", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "progetto",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ProgettoDipendente> progettiDipendenti;
 }

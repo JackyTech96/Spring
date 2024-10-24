@@ -36,6 +36,6 @@ public class Dipendente {
     @Column(name = "ruolo")
     private String ruolo;
 
-    @OneToMany(mappedBy = "dipendente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dipendente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ProgettoDipendente> progettiDipendenti;
 }

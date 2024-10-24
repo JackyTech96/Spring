@@ -8,7 +8,9 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ProgettoDto {
-    public String nome;
-    public String descrizione;
+public class ProgettoDipendenteDto {
+    public Integer progettoId;
+    public Integer dipendenteId;
+    public ProgettoDto progettoDto;
+    public DipendenteDto dipendenteDto;
 }

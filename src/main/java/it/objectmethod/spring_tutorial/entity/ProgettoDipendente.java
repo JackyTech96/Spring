@@ -16,11 +16,11 @@ public class ProgettoDipendente {
     @Column(name = "progetto_dipendente_id")
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "progetto_id", nullable = false)
     private Progetto progetto;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dipendente_id", nullable = false)
     private Dipendente dipendente;
 

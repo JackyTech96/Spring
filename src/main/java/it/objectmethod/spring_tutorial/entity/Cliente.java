@@ -32,7 +32,7 @@ public class Cliente {
     @Column(name = "azienda")
     private String azienda;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Progetto> progetti;
 
 }

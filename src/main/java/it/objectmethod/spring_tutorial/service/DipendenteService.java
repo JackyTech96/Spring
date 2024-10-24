@@ -39,17 +39,17 @@ public class DipendenteService {
         return dipendenteMapperWithMapStruct.toDto(dipendente);
     }
 
-    public List<DipendenteDto> findByNome(final String nome) {
-//        final List<Dipendente> entities = dipendenteRepository.findByNome(nome);
+//    public List<DipendenteDto> findByNome(final String nome) {
+//      final List<Dipendente> entities = dipendenteRepository.findByNome(nome);
 //        final List<DipendenteDto> toDtos = dipendenteMapperWithMapStruct.toDtoList(entities);
-        return dipendenteMapperWithMapStruct.toDtoList(dipendenteRepository.findByNome(nome));
-    }
+//        return dipendenteMapperWithMapStruct.toDtoList(dipendenteRepository.findByNome(nome));
+//    }
 
-    public List<DipendenteDto> findBy(DipendenteParams params) {
-        return dipendenteMapperWithMapStruct
-                .toDtoList((dipendenteRepository
-                        .findByNomeAndEmail(params.getNome(), params.getEmail())));
-    }
+//    public List<DipendenteDto> findBy(DipendenteParams params) {
+//        return dipendenteMapperWithMapStruct
+//                .toDtoList((dipendenteRepository
+//                        .findByNomeAndEmail(params.getNome(), params.getEmail())));
+//    }
 
 
     public List<DipendenteDto> createDipendente(final DipendenteDto dipendenteDto) {
@@ -83,5 +83,9 @@ public class DipendenteService {
             throw new NullPointerException("Utente da eliminare non trovato");
         }
         return getAllDipendenti();
+    }
+
+    public List<DipendenteDto> withSpecifications(final DipendenteParams params) {
+        return dipendenteMapperWithMapStruct.toDtoList(dipendenteRepository.findAll(params.toSpecification()));
     }
 }
