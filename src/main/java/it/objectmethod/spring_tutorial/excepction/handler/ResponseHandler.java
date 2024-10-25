@@ -1,4 +1,4 @@
-package it.objectmethod.spring_tutorial.exepction.handler;
+package it.objectmethod.spring_tutorial.excepction.handler;
 
 import org.springframework.http.ResponseEntity;
 

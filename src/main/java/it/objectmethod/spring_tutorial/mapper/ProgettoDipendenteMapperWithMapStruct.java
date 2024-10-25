@@ -12,8 +12,8 @@ import java.util.List;
 public interface ProgettoDipendenteMapperWithMapStruct extends BaseMappingMethod<ProgettoDipendenteDto, ProgettoDipendente> {
     @Mapping(source = "progetto.progettoId", target = "progettoId")
     @Mapping(source = "dipendente.dipendenteId", target = "dipendenteId")
-    @Mapping(source="progetto", target="progettoDto")
-    @Mapping(source="dipendente", target="dipendenteDto")
+    @Mapping(source = "progetto", target = "progettoDto")
+    @Mapping(source = "dipendente", target = "dipendenteDto")
     @Override
     ProgettoDipendenteDto toDto(ProgettoDipendente progettoDipendente);
 

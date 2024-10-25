@@ -17,7 +17,7 @@ public class ProgettoDipendente {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "progetto_id", nullable = false)
+    @JoinColumn(name = "progetto_id", nullable = false, referencedColumnName = "progetto_id")
     private Progetto progetto;
 
     @ManyToOne(fetch = FetchType.LAZY)

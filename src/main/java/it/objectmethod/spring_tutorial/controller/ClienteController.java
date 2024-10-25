@@ -1,8 +1,8 @@
 package it.objectmethod.spring_tutorial.controller;
 
 import it.objectmethod.spring_tutorial.dto.ClienteDto;
-import it.objectmethod.spring_tutorial.exepction.handler.ResponseUtil;
-import it.objectmethod.spring_tutorial.filter.ClienteParams;
+import it.objectmethod.spring_tutorial.excepction.handler.ResponseUtil;
+import it.objectmethod.spring_tutorial.param.ClienteParams;
 import it.objectmethod.spring_tutorial.response.ResponseWrapper;
 import it.objectmethod.spring_tutorial.service.ClienteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,13 +52,13 @@ public class ClienteController {
 //        return clienteService.findByAzienda(azienda);
 //    }
 
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity<List<ClienteDto>> createCliente(@RequestBody ClienteDto clienteDto, final HttpServletRequest request) {
         return ResponseUtil
                 .execute(() -> new ResponseEntity<>(clienteService.createCliente(clienteDto), HttpStatus.CREATED), request);
     }
 
-    @PutMapping("/put/{clienteId}")
+    @PutMapping("{id}")
     public List<ClienteDto> updateCliente(@RequestBody final ClienteDto newClienteDto,
                                           @PathVariable final Integer clienteId) {
         return clienteService.updateClienteById(newClienteDto, clienteId);
@@ -71,7 +71,7 @@ public class ClienteController {
 //    }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public List<ClienteDto> deleteCliente(@PathVariable(name = "id") final Integer clienteId) {
         return clienteService.deleteCliente(clienteId);
     }

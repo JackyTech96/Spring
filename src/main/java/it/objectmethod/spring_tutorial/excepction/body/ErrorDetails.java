@@ -1,4 +1,4 @@
-package it.objectmethod.spring_tutorial.exepction.body;
+package it.objectmethod.spring_tutorial.excepction.body;
 
 import lombok.Builder;
 import lombok.Data;

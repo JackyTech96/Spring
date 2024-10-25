@@ -2,7 +2,7 @@ package it.objectmethod.spring_tutorial.service;
 
 import it.objectmethod.spring_tutorial.dto.ClienteDto;
 import it.objectmethod.spring_tutorial.entity.Cliente;
-import it.objectmethod.spring_tutorial.filter.ClienteParams;
+import it.objectmethod.spring_tutorial.param.ClienteParams;
 import it.objectmethod.spring_tutorial.mapper.ClienteMapperWithMapStruct;
 import it.objectmethod.spring_tutorial.repository.ClienteRepository;
 import it.objectmethod.spring_tutorial.response.ResponseWrapper;

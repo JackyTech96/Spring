@@ -2,9 +2,11 @@ package it.objectmethod.spring_tutorial.service;
 
 import it.objectmethod.spring_tutorial.dto.DipendenteDto;
 import it.objectmethod.spring_tutorial.entity.Dipendente;
-import it.objectmethod.spring_tutorial.filter.DipendenteParams;
+import it.objectmethod.spring_tutorial.excepction.NotFoundException;
+import it.objectmethod.spring_tutorial.param.DipendenteParams;
 import it.objectmethod.spring_tutorial.mapper.DipendenteMapperWithMapStruct;
 import it.objectmethod.spring_tutorial.repository.DipendenteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,7 @@ public class DipendenteService {
 
         return dipendenteMapperWithMapStruct.toDtoList(dipendenti);
     }
+
 
     public DipendenteDto findDipendenteById(final Integer dipendenteId) {
         Dipendente dipendente = dipendenteRepository.findById(dipendenteId).orElseThrow();
@@ -86,6 +89,14 @@ public class DipendenteService {
     }
 
     public List<DipendenteDto> withSpecifications(final DipendenteParams params) {
+//        params.validate();
+//        List<Dipendente> response = dipendenteRepository.findAll(params.toSpecification());
+//        if (response.isEmpty()) {
+//            throw new NotFoundException("Nessun dipendente trovato");
+//        }
+//        return dipendenteMapperWithMapStruct.toDtoList(response);
         return dipendenteMapperWithMapStruct.toDtoList(dipendenteRepository.findAll(params.toSpecification()));
     }
+
+
 }

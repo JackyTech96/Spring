@@ -1,4 +1,4 @@
-package it.objectmethod.spring_tutorial.filter;
+package it.objectmethod.spring_tutorial.param;
 
 import it.objectmethod.spring_tutorial.entity.Cliente;
 import it.objectmethod.spring_tutorial.entity.Cliente_;

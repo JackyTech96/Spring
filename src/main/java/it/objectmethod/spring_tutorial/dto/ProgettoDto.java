@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class ProgettoDto {
-    public String nome;
-    public String descrizione;
+    private String nome;
+    private String descrizione;
 }
